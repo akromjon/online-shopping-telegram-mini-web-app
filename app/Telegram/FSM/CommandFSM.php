@@ -9,7 +9,9 @@ namespace App\Telegram\FSM;
 use App\Models\TelegramUser;
 use App\Telegram\FSM\Base;
 use App\Telegram\Menu\Menu;
-use App\Telegram\Telegram;
+use Telegram\Bot\Laravel\Facades\Telegram;
+
+
 class CommandFSM extends Base
 {
     protected function route(): void
@@ -24,9 +26,10 @@ class CommandFSM extends Base
     {
         $user = getUser();
 
-        Telegram::sendMessage(params: Menu::main(chatId: $user->chat_id));
+        Telegram::sendMessage(params: [
+            'chat_id' => $user->chat_id,
+            'text' => 'hello world',
+        ]);
     }
-
-
 
 }
