@@ -44,10 +44,10 @@ final class Message extends ParentMessage
         return $this->messageId;
     }
 
-    public function getSender():MessageSender
-    {
-        return $this->sender;
-    }
+    // public function getSender():MessageSender
+    // {
+    //     return $this->sender;
+    // }
 
 
 

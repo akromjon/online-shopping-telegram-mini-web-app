@@ -26,10 +26,8 @@ class CommandFSM extends Base
     {
         $user = getUser();
 
-        Telegram::sendMessage(params: [
-            'chat_id' => $user->chat_id,
-            'text' => 'hello world',
-        ]);
+        Telegram::sendMessage(params: Menu::getWebApp(chatId: $user->chat_id));
     }
+
 
 }

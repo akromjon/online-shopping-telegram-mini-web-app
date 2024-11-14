@@ -13,8 +13,6 @@ class BotController extends Controller
     {
         $type = $this->objectType(update: getWebhookUpdate());
 
-        logger('load');
-
         match ($type) {
             'message' => MessageFSM::handle($type),
             'callback_query' => CallbackQueryFSM::handle($type),

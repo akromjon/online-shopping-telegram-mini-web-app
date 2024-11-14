@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BotController;
+use App\Http\Controllers\WebAppController;
 use App\Http\Middleware\TelegramUserChatStatusUpdateMiddleware;
 use App\Http\Middleware\TelegramUserLastUsedAtUpdatorMiddleware;
 use Illuminate\Http\JsonResponse;
@@ -22,6 +23,8 @@ Route::get(uri: '/set-webhook', action: function (): JsonResponse {
         'res' => $res
     ]);
 });
+
+Route::get('/web-app',[WebAppController::class,'getApp']);
 
 
 Route::post(
