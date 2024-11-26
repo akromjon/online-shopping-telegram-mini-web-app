@@ -1,3 +1,3 @@
-@extends('components.main')
-@section('content')
+@extends('lib.base')
+@section('main')
 @endsection

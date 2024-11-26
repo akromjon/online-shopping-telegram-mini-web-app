@@ -1,206 +1,247 @@
-/**
-* Template Name: GroMart - Web App E-Commerce Shop and Store Mobile Template
-* Version: 1.0
-* Author: HidraTheme 
-* Developed By: HidraTheme  
-* Author URL: https://themeforest.net/user/hidratheme
-
-NOTE: This is the custom js file for the template
-**/
-
-(function ($) {
-
-  "use strict"; 
-  
-  $('.row.copyright').html('2021 <span>GroMart</span>, All rights reserved.');
-
-  /*=================== PRELOADER ===================*/
-  $(window).on('load',function() { 
-      $(".preloading").fadeOut("slow"); 
-  });
-
-  /*=================== SIDENAV CATEGORY ===================*/
-  $('#button-collapse-category').sideNav({
-      menuWidth: 250, 
-      edge: 'left',
-      closeOnClick: true, 
-      draggable: true, 
-      onOpen: function(el) {}, 
-      onClose: function(el) {}, 
-    }
-  );
-  /*=================== SIDENAV ACCOUNT ===================*/
-  $('#button-collapse-account').sideNav({
-      menuWidth: 250, 
-      edge: 'right',
-      closeOnClick: true, 
-      draggable: true, 
-      onOpen: function(el) {}, 
-      onClose: function(el) {}, 
-    }
-  );
-
-  /*=================== FOOTER ===================*/ 
-  $('#page-content').css('min-height',$(document).height() - ($('#header').height() + $('#footer').height() )  );
-
-  /*=================== CAROUSEL SLIDER  ===================*/
-  $('.carousel.carousel-slider').carousel({fullWidth: true},setTimeout(autoplay, 4500));
-    function autoplay() {
-      $('.carousel').carousel('next');
-      setTimeout(autoplay, 4500);
+/*--------------HOmeScreen1 Category Slider------------------*/
+$(".homescreen-second-wrapper-slider, .homescreen-fifth-wrapper-slider").slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  swipeToSlide: true,
+  infinite:true,
+  variableWidth: true,
+  autoplaySpeed: 2000,
+  dots: false,
+  arrows:false
+});
+/*--------------HOmeScreen1 Seller Slider------------------*/
+$(".homescreen-fourth-wrapper-slider").slick({
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  autoplay: true,
+  swipeToSlide: true,
+  infinite:true,
+  variableWidth: true,
+  autoplaySpeed: 2000,
+  dots: false,
+  arrows:false
+});
+/*--------------HOmeScreen1 Seller Slider------------------*/
+$(".homescreen-sixth-wrapper-slider").slick({
+  slidesToShow: 2,
+  slidesToScroll: 1,
+  autoplay: true,
+  swipeToSlide: true,
+  infinite:true,
+  autoplaySpeed: 2000,
+  dots: false,
+  arrows:false
+});
+/*-------------------------------------  Sticky Header-------------------------------------*/
+$(window).scroll(function(){
+  if ($(window).scrollTop() >= 20) {
+    $('#top-header ,#top-navbar').addClass('fixed');
   }
+  else {
+    $('#top-header ,#top-navbar').removeClass('fixed');
+  }
+});
+/*-------------------------------------  Currency AND language Checkbox-------------------------------------*/
+var $radioButtons = $('#language-screen input[type="radio"],#currency-page input[type="radio"');
+$radioButtons.click(function() {
+  $radioButtons.each(function() {
+    $(this).parent().toggleClass('language-sel', this.checked);
+  });
+});
+/*------------------------------------- Read More Text-------------------------------------*/
+$('.moreless-button').click(function() {
+  $('.moretext').toggleClass('d-inline');
 
-  /*=================== QTY INPUT ===================*/
-    $('<div class="quantity-button quantity-up">+</div><div class="quantity-button quantity-down">-</div>').insertAfter('.quantity input');
-    $('.quantity').each(function() {
-      var spinner = jQuery(this),
-        input = spinner.find('input[type="number"]'),
-        btnUp = spinner.find('.quantity-up'),
-        btnDown = spinner.find('.quantity-down'),
-        min = input.attr('min'),
-        max = input.attr('max');
+  if ($('.moreless-button').text() == "Read less") {
+    $(this).text("Read more")
+  } else {
+    $(this).text("Read less")
+  }
+});
+/*------------------------------------- Increment Decrement-------------------------------------*/
+$('.add').on('click', function () {
+  if ($(this).prev().val() < 100) {
+    $(this).prev().val(+$(this).prev().val() + 1);
+  }
+});
+$('.sub').on('click', function () {
+  if ($(this).next().val() > 1) {
+    if ($(this).next().val() > 1) $(this).next().val(+$(this).next().val() - 1);
+  }
+});
+/*------------------------------------- Show Hide Password -------------------------------------*/
+$("#eye ,#eye1").click(function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  input = $(this).parent().find("input");
+  if (input.attr("type") == "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+});
+/*------------------------------------- Onboarding Screen -------------------------------------*/
+$(".skip_btn_1").click(function(){
 
-      btnUp.on("click", function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue >= max) {
-          var newVal = oldValue;
-        } else {
-          var newVal = oldValue + 1;
+  $("#first").removeClass("active");
+  $(".first_slide").removeClass("active");  
+
+  $("#second").addClass("active");
+  $(".second_slide").addClass("active");
+
+});
+
+$(".skip_btn_2").click(function(){
+ $("#second").removeClass("active");
+ $(".second_slide").removeClass("active");
+
+ $("#third").addClass("active");
+ $(".third_slide").addClass("active");
+});
+/*------------------------------------- Favourite Hide Show -------------------------------------*/
+$('.item-bookmark').on('click',function(){
+  $(this).toggleClass('active');
+}); 
+
+/*------------------------------------- Preloader -------------------------------------*/
+
+$(window).on("load" , function () {
+  $('.circle').fadeOut();
+  $('.loader-mask').delay(350).fadeOut('slow');
+});
+
+$(window).on("load" , function () {
+  $('.loader-mask1').delay(2000).fadeOut(3000);
+
+});
+/*-------------------------------------Anchore Tag Link Added-------------------------------------*/
+$(".cloth-redirect, .best-seller-redirect").wrap('<a href="single-cloths.html"></a>');
+$(".shoes-redirect").wrap('<a href="single-shoes.html"></a>');
+$(".electronic-redirect").wrap('<a href="single-electronics.html"></a>');
+$(".offer-1, .homepage1-tab-details-wrapper").wrap('<a href="clothes-screen.html"></a>');
+$(".offer-2, .offer-4").wrap('<a href="electronic-screen.html"></a>');
+$(".offer-3").wrap('<a href="shoes-screen.html"></a>');
+/*-------------------------------------OTP Section-------------------------------------*/
+if(jQuery('#otp').length > 0)
+  $('.digit-group').find('input').each(function() {
+    $(this).attr('maxlength', 1);
+    $(this).on('keyup', function(e) {
+      var thisVal = $(this).val();
+      var parent = $($(this).parent());
+
+      if(e.keyCode === 8 || e.keyCode === 37) {
+        var prev = parent.find('input#' + $(this).data('previous'));
+
+        if(prev.length) {
+          $(prev).select();
         }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
+      } else {
+        var next = parent.find('input#' + $(this).data('next'));
 
-      btnDown.on("click", function() {
-        var oldValue = parseFloat(input.val());
-        if (oldValue <= min) {
-          var newVal = oldValue;
-        } else {
-          var newVal = oldValue - 1;
+        if(!$.isNumeric(thisVal))
+        {
+          $(this).val('');
+          return false;
         }
-        spinner.find("input").val(newVal);
-        spinner.find("input").trigger("change");
-      });
 
+        if(next.length) {
+          $(next).select();
+        } else {
+          if(parent.data('autosubmit')) {
+            parent.submit();
+          }
+        }
+      }
     });
-
-  /*=================== GALLERY FILTERING FUCTION  ===================*/
-  $(".filter-button").on("click", function() {
-      var value = $(this).attr('data-filter');
-      
-      if(value == "gallery-no-filter")
-      {
-          $('.gallery-img-box').removeClass("gallery-hidden");
-      }
-      else
-      { 
-          $(".gallery-img-box").not('.'+value).addClass("gallery-hidden");   
-          $('.gallery-img-box').filter('.'+value).removeClass("gallery-hidden");
-          
-      }
   });
+/*-------------------------------------Wallet Screen-------------------------------------*/
+$(".payment-mode .check-select-mode input[type='radio']").change(function(){
+  var item=$(this);    
+  if(item.is(":checked"))
+  {
+    window.location.href= item.data("target")
+  }    
+});
+/*-------------------------------------Tab Bar Js-------------------------------------*/
+const navigationOptions = [
+{
+  name: 'home',
+  color: '#5B37B7'
+},
+{
+  name: 'search',
+  color: '#C9379D'
+},
+{
+  name: 'cart(0)',
+  color: '#E6A919'
+},
+{
+  name: 'wishlist',
+  color: '#1892A6'
+},
+{
+  name: 'account',
+  color: '#E6A919'
+}
+];
 
-  $('.filter-gallery .filter-button').on("click", function() {
-      $('.filter-gallery').find('.filter-button.active').removeClass('active');  
-      $(this).addClass('active');
+const links = document.querySelectorAll('nav a');
+function handleClick(e) {
+  e.preventDefault();
+  links.forEach(link => {
+    if (link.classList.contains('active')) {
+      link.classList.remove('active');
+    }
   });
+  this.classList.add('active');
+}
+/*-------------------------------------Faq Section-------------------------------------*/
+$('.nested-accordion').find('.comment').slideUp();
+$('.nested-accordion').find('h3').click(function(){
+  $(this).next('.comment').slideToggle(100);
+  $(this).toggleClass('selected');
+});
 
-  /*=================== MAGNIFICPOPUP GALLERY  ===================*/
-  $(".gallery-list").magnificPopup({
-          type: "image",
-          removalDelay: 300 
-      });
-
-  /*======================= PROMO  =======================*/ 
-   if($('#promo-item').length > 0){
-      $("#promo-item").owlCarousel({
-        dots: false,
-        loop: true,
-        autoplay: true,
-        slideSpeed : 2000,
-        margin: 0,
-        responsiveClass: true,
-        nav: false, 
-           navText: ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], 
-        responsive: {
-          0: {
-            items: 1,
-            nav: false
-          },
-          480: {
-            items: 1,
-            nav: false
-          },
-          600: {
-            items: 1,
-           nav: false
-          },
-          1000: {
-            items: 1,
-            nav: false, 
-            margin: 0
-          }
-        }
-         
-      });
+/*-------------------------------------Friend Section-------------------------------------*/
+$(document).ready(function() {
+  $(".friend-select input").click(function() {
+    var content = $(this);
+    if (content.is(":checked")) {
+      $(this).parent().addClass("active");
+      $(this).parent().siblings().children(".custom-radio-sel-friend").addClass("active");
     }
-
-  // ======================= TESTIMONIAL  ======================= // 
-   if($('#testimonial-item').length > 0){
-      $("#testimonial-item").owlCarousel({
-        dots: true,
-        loop: true,
-        autoplay: true,
-        slideSpeed : 2000,
-        margin: 0,
-        responsiveClass: true,
-        nav: false, 
-           navText: ["<i class=\"fa fa-angle-left\" aria-hidden=\"true\"></i>", "<i class=\"fa fa-angle-right\" aria-hidden=\"true\"></i>"], 
-        responsive: {
-          0: {
-            items: 1,
-            nav: false
-          },
-          480: {
-            items: 1,
-            nav: false
-          },
-          600: {
-            items: 1,
-           nav: false
-          },
-          1000: {
-            items: 1,
-            nav: false, 
-            margin: 0
-          }
-        }
-         
-      });
+    else {
+      $(this).parent().siblings().children(".custom-radio-sel-friend").removeClass("active");
+      $(this).parent().removeClass("active");
     }
+    if ($(this).parent().hasClass('active')) { 
 
-  /*=================== SLICK CAROUSEL FEATURED PRODUCT ===================*/
-      $("#featured-product").slick({
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 2
-      });
+      $(this).parent().children(".custom-radio-sel-friend").text("Invite");
+    } else {
+      $(this).parent().children(".custom-radio-sel-friend").text("Invited")
+    }
+  });
+});
 
-  /*=================== SLICK CAROUSEL POPULER PRODUCT ===================*/
-      $("#populer-product").slick({
-        infinite: true,
-        slidesToShow: 2,
-        slidesToScroll: 2
-      });
+/*-------------------------------------Mode Changes-------------------------------------*/
+jQuery('.theme-change').on('click',function(){
+  jQuery('.site-content').toggleClass('theme-dark'); 
+  if(jQuery('.site-content').hasClass('theme-dark')){ 
+   
+    location.replace("/envato/zoopstore-pwa-2.0/zoop-dark/onboarding-screen.html")
+  }else{ 
+      location.replace("/envato/zoopstore-pwa-2.0/main-file/onboarding-screen.html")
+  }
+});
 
-  /*=================== SLICK CAROUSEL PRODUCT IMAGE ===================*/
-      $("#product-image").slick({
-      arrows: false,
-      dots: true 
-      });
+/*-------------------------------------Anchore Tag Link Added-------------------------------------*/
+$(".redirect-clothes").wrap('<a href="clothes-screen.html"></a>');
+$(".redirect-electronic").wrap('<a href="electronic-screen.html"></a>');
+$(".redirect-shoes").wrap('<a href="shoes-screen.html"></a>');
 
 
 
 
 
-})(jQuery);
+
